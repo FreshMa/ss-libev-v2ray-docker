@@ -1,3 +1,4 @@
+# build v2ray-plugin
 FROM golang:1.16-alpine AS v2ray
 
 RUN apk add --no-cache --virtual .go-deps\
