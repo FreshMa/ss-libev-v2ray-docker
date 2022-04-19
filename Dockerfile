@@ -1,7 +1,7 @@
 # build v2ray-plugin
 FROM golang:1.16-alpine AS v2ray
 
-# GOPROXY="https://proxy.golang.com.cn,direct"
+# ENV GOPROXY="https://proxy.golang.com.cn,direct"
 RUN apk add --no-cache --virtual .go-deps\
     git \
     bash \
