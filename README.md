@@ -3,6 +3,8 @@ shadowsocks-libev with v2ray-plugin dockerfile
 
 参考了原版的 [Dockerfile](https://github.com/shadowsocks/shadowsocks-libev/blob/master/docker/alpine/Dockerfile) ，添加了 v2ray-plugin 的构建
 
+当然在build之前建议改掉 server-config.json 里边的默认密码
+
 ## build docker image
 `docker build -t {image_name} .`
 
