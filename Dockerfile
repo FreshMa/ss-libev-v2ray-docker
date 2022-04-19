@@ -1,10 +1,13 @@
 # build v2ray-plugin
 FROM golang:1.16-alpine AS v2ray
 
+# for some network
 # ENV GOPROXY="https://proxy.golang.com.cn,direct"
-RUN apk add --no-cache --virtual .go-deps\
-    git \
-    bash \
+RUN set -ex \
+    #&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+    && apk add --no-cache --virtual .go-deps\
+        git \
+        bash \
     && go get github.com/shadowsocks/v2ray-plugin\
     && apk del .go-deps
 
@@ -23,9 +26,9 @@ ENV TZ UTC
 ENV ARGS=
 
 WORKDIR ss-libev
-
 RUN set -ex \
  # Build environment setup
+ #&& sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
  && apk add --no-cache --virtual .build-deps \
       autoconf \
       automake \
@@ -40,6 +43,7 @@ RUN set -ex \
       pcre-dev \
       git\
  # git clone
+ # && git config --global .url."https://hub.fastgit.xyz/". insteadOf https://github.com/ \
  && git clone --recursive https://github.com/shadowsocks/shadowsocks-libev.git \
  && cd shadowsocks-libev \
  # Build & install
